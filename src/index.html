@@ -9,13 +9,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="cabecalho">
-            <header>
-                <h1>Jogo da Velha</h1>
-                <p>Escolha uma opção:</p>
-                <button class="jogadorX">Jogador X</button>
-                <button class="jogadorO">Jogador O</button>
-            </header>
+        <header class="cabecalho">
+            <h1>Jogo da Velha</h1>
+            <label for="player1">X</label>
+            <input type="text" id="player1" placeholder="Nome do jogador 1"><br>
+            <label for="player2">O</label>
+            <input type="text" id="player2" placeholder="Nome do jogador 2">
+        </header>
         <div class="areaMarcacao">
             <span class="area" data-name="0.1"></span>
             <span class="area" data-name="0.2"></span>
@@ -27,6 +27,8 @@
             <span class="area" data-name="2.3"></span>
             <span class="area" data-name="2.3"></span>
         </div>
+        <div class="vez">
+            <h1> Vez de: </h1>
         </div>
     </div>
 </body>

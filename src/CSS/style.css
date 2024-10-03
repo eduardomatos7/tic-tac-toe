@@ -1,12 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75,500&display=swap');
+
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+  
+body{
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 75;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(116deg, #ffb352, #ff5c20, #300f02);
+}
 
 .container{
-    width: 300px;
-    height: 400px;
-    background-color: antiquewhite;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 350px;
+    height: 500px;
+    background-color: rgb(29, 27, 27);
     text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1.5rem;
+    box-shadow: 1px 1px 13px 5px white;
+    
+}
+.cabecalho{
+    margin: 1rem;
+}
+
+#player1, #player2{
+    padding: 0.5rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: 0;
+}
+
+
+/* Area de marcação */
+
+.areaMarcacao{
+    width: 250px;
+    height: 290px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.area{
+    border: 1.5px solid rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
+.area:nth-child(1),
+.area:nth-child(2),
+.area:nth-child(3){
+    border-top: 0;
+}
+
+.area:nth-child(7),
+.area:nth-child(8),
+.area:nth-child(9){
+    border-bottom: 0;
+}
+.area:nth-child(1),
+.area:nth-child(4),
+.area:nth-child(7){
+    border-left: 0;
+}
+
+.area:nth-child(3),
+.area:nth-child(6),
+.area:nth-child(9){
+    border-right: 0;
+}
+
+.vez{
+    margin: 20px 0;
 }
