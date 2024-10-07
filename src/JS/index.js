@@ -31,14 +31,50 @@ function updateTitle() {
 
 function initializeGame(){
     vBoard = [['', '', ''], ['', '', ''], ['', '', '']]
-  turnPlayer = 'player1'
-  document.querySelector('h2').innerHTML = ' Vez de: <span id="turnPlayer"></span>'
-  updateTitle()
-  BoardRegions.forEach(function(element){
-    element.classList.remove('win')
-    element.innerText = ''
-    element.addEventListener('click', handleBoardClick)
-  })
+    turnPlayer = 'player1'
+    document.querySelector('h2').innerHTML = ' Vez de: <span id="turnPlayer"></span>'
+    updateTitle()
+    BoardRegions.forEach(function(element){
+        element.style.cursor = 'pointer'
+        element.classList.remove('win')
+        element.innerText = ''
+        element.addEventListener('click', handleBoardClick)
+    })
+        
+}
+
+function disableRegion(element){
+    element.style.cursor = 'not-allowed' //mostrar bloqueio ao tentar clicar na regiao ja marcada
+    element.removeEventListener('click', handleBoardClick)
+}
+
+
+
+function handleBoardClick(ev){
+    const span = ev.currentTarget
+    const region = ev.currentTarget.dataset.region // N.N
+    const rowColumnPair = region.split('.')
+    const row = rowColumnPair[0]
+    const column = rowColumnPair[1]
+    if (span.innerText === ''){
+        if (turnPlayer === 'player1'){
+            span.innerHTML = 'X'
+            vBoard[row][column] = 'X'
+            turnPlayer = 'player2'
+            console.log(turnPlayer)
+    
+        }else{
+            span.innerHTML = 'O'
+            turnPlayer = 'player1'
+            vBoard[row][column] = 'O'
+        }
+        console.clear()
+        console.table(vBoard)
+        if (span !== ''){
+            disableRegion(span)}
+
+
+    }
     
 }
 
