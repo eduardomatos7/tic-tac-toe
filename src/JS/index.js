@@ -70,30 +70,50 @@ function disableRegion(element){
     element.removeEventListener('click', handleBoardClick)
 }
 
+// FUnção para aplicar traço na hora da vitoria
 function handleWin(regions) {
-    regions.forEach(function (region) {
-        const element = document.querySelector('[data-region="' + region + '"]');
-        element.classList.add('win');
-    });
+    const winLine = document.createElement('div');
+    winLine.classList.add('winLine');
+    
+    const board = document.querySelector('.areaMarcacao');
+    board.appendChild(winLine); // Adiciona a linha ao tabuleiro
 
-    // Verifica se a vitória foi em linha, coluna ou diagonal e adiciona as classes correspondentes
-    if (regions.includes("0.0") && regions.includes("0.1") && regions.includes("0.2") ||
-        regions.includes("1.0") && regions.includes("1.1") && regions.includes("1.2") ||
-        regions.includes("2.0") && regions.includes("2.1") && regions.includes("2.2")) {
-        document.querySelectorAll('.win').forEach(el => el.classList.add('horizontal-win'));
-    } else if (regions.includes("0.0") && regions.includes("1.0") && regions.includes("2.0") ||
-               regions.includes("0.1") && regions.includes("1.1") && regions.includes("2.1") ||
-               regions.includes("0.2") && regions.includes("1.2") && regions.includes("2.2")) {
-        document.querySelectorAll('.win').forEach(el => el.classList.add('vertical-win'));
+    if (regions.includes("0.0") && regions.includes("0.1") && regions.includes("0.2") ){ // Vitória horizontal top
+        winLine.classList.add('horizontal-top-win');
+        setTimeout(() => winLine.classList.add('expand-horizontal'), 100);
+    }else if(regions.includes("1.0") && regions.includes("1.1") && regions.includes("1.2")){ // Vitória horizontal center
+            winLine.classList.add('horizontal-center-win');
+            setTimeout(() => winLine.classList.add('expand-horizontal'), 100);
+    } else if(regions.includes("2.0") && regions.includes("2.1") && regions.includes("2.2")){ // Vitória horizontal bottom
+            winLine.classList.add('horizontal-bottom-win');
+            setTimeout(() => winLine.classList.add('expand-horizontal'), 100);
+        
+    } else if (regions.includes("0.0") && regions.includes("1.0") && regions.includes("2.0")){
+            winLine.classList.add('vertical-left-win');
+            setTimeout(() => winLine.classList.add('expand-vertical'), 100);
+            
+    }else if (regions.includes("0.1") && regions.includes("1.1") && regions.includes("2.1")){
+        winLine.classList.add('vertical-center-win');
+        setTimeout(() => winLine.classList.add('expand-vertical'), 100);
+
+    }else if(regions.includes("0.2") && regions.includes("1.2") && regions.includes("2.2")){
+        // Vitória vertical
+        winLine.classList.add('vertical-right-win');
+        setTimeout(() => winLine.classList.add('expand-vertical'), 100);
     } else if (regions.includes("0.0") && regions.includes("1.1") && regions.includes("2.2")) {
-        document.querySelectorAll('.win').forEach(el => el.classList.add('diagonal-left'));
+        // Diagonal da esquerda para a direita
+        winLine.classList.add('diagonal-left');
+        setTimeout(() => winLine.classList.add('expand-diagonal'), 100);
     } else if (regions.includes("0.2") && regions.includes("1.1") && regions.includes("2.0")) {
-        document.querySelectorAll('.win').forEach(el => el.classList.add('diagonal-right'));
+        // Diagonal da direita para a esquerda
+        winLine.classList.add('diagonal-right');
+        setTimeout(() => winLine.classList.add('expand-diagonal'), 100);
     }
 
     const playerName = document.getElementById(turnPlayer).value;
     document.querySelector('h2').innerHTML = playerName + ' Venceu!';
 }
+
 
 
 function handleBoardClick(ev){
