@@ -24,6 +24,9 @@ const BoardRegions = document.querySelectorAll('.area')
 const restartButton = document.querySelector('[data-win-button]')
 const winningMessage = document.querySelector('[data-winning-message]')
 const drawText = document.querySelector('[data-winning-message] h1')
+const surgirArea = document.querySelector('[data-areaMarcacao]')
+const aumentarContainer = document.querySelector('[data-show-container]')
+const hiddenVez = document.getElementById('vez')
 
 let vBoard = []
 let turnPlayer = ''
@@ -34,6 +37,9 @@ function updateTitle() {
 }
 
 function initializeGame(){
+    hiddenVez.classList.add('hiddenVez')
+    aumentarContainer.classList.add('show-container')
+    surgirArea.classList.add('show-areaMarcação')
     drawText.innerText = ''
     winningMessage.classList.remove('show-winMessage')
     const winLine = document.querySelector('.winLine');
@@ -78,6 +84,11 @@ function getWinRegions() {
 function disableRegion(element){
     element.style.cursor = 'not-allowed' //mostrar bloqueio ao tentar clicar na regiao ja marcada
     element.removeEventListener('click', handleBoardClick)
+}
+function disableAllRegions() {
+    BoardRegions.forEach(function (element) {
+        disableRegion(element) // Desabilita as regiões
+    });
 }
 
 // FUnção para aplicar traço na hora da vitoria
@@ -126,7 +137,7 @@ function handleWin(regions) {
         drawText.innerText = playerName + ' Venceu!'
         winningMessage.classList.add('show-winMessage')
     }, 500)
-    
+    disableAllRegions()
 }
 
 function handleDraw() {
