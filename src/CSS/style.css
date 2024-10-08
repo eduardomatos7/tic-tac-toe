@@ -65,6 +65,7 @@ body{
 /* Area de marcação */
 
 .areaMarcacao{
+    position: relative;
     width: 250px;
     height: 290px;
     display: grid;
@@ -138,51 +139,85 @@ body{
     transition: all 0.5s ease-in-out;
 }
 
-.areaMarcacao span.win {
-    position: relative;
-  }
-  
-  .areaMarcacao span.win.horizontal-win::before {
+.winLine {
     content: '';
     position: absolute;
-    width: 100%;
+    background-color: #25a340;
+    transition: width 1s ease;
+    z-index: 10; /* Certifique-se de que a linha está acima das células */
     height: 5px; /* Espessura da linha */
-    background-color: #25a340;
-    top: 50%; /* Centraliza verticalmente */
+    width: 0; /* Começa com 0% */
+    transform-origin: left;
+}
+
+.horizontal-top-win {
+    top: 15%;
     left: 0;
-    transform: translateY(-50%);
-  }
-  
-  .areaMarcacao span.win.vertical-win::before {
-    content: '';
-    position: absolute;
-    width: 5px; /* Espessura da linha */
-    height: 100%;
-    background-color: #25a340;
+    width: 0; /* Inicialmente 0 */
+    transition: width 1s ease;
+}
+
+.horizontal-center-win {
+    top: 50%;
+    left: 0;
+    width: 0; /* Inicialmente 0 */
+    transition: width 1s ease;
+}
+
+.horizontal-bottom-win {
+    top: 84%;
+    left: 0;
+    width: 0; /* Inicialmente 0 */
+    transition: width 1s ease;
+}
+
+.vertical-left-win{
     top: 0;
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%);
-  }
-  
-  .areaMarcacao span.win.diagonal-left::before {
-    content: '';
-    position: absolute;
-    width: 150%; /* Para ajustar o comprimento da linha diagonal */
-    height: 5px;
-    background-color: #25a340;
-    top: 50%;
-    left: -25%; /* Alinhar a linha diagonal esquerda */
-    transform: translateY(-50%) rotate(45deg); /* Rotação para diagonal da esquerda */
-  }
-  
-  .areaMarcacao span.win.diagonal-right::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 5px;
-    background-color: #25a340;
-    top: 50%;
-    left: -25%; /* Alinhar a linha diagonal direita */
-    transform: translateY(-50%) rotate(-45deg); /* Rotação para diagonal da direita */
-  }
-  
+    left: 15%;
+    height: 0;
+    width: 5px;
+    transition: height 1s ease;
+}
+
+.vertical-center-win{
+    top: 0;
+    left: 49%;
+    height: 0;
+    width: 5px;
+    transition: height 1s ease;
+}
+
+.vertical-right-win{
+    top: 0;
+    left: 82.5%;
+    height: 0;
+    width: 5px;
+    transition: height 1s ease;
+}
+
+.diagonal-left {
+    top: 0;
+    left: 0;
+    width: 0;
+    transform: rotate(45deg);
+    transition: width 1s ease;
+}
+
+.diagonal-right {
+    top: 100%;
+    width: 0;
+    transform: rotate(-45deg);
+    transition: width 1s ease;
+}
+
+.expand-horizontal {
+    width: 100%; /* Transição suave para cobrir a linha inteira */
+}
+
+.expand-vertical {
+    height: 100%; /* Transição suave para cobrir a coluna inteira */
+}
+
+.expand-diagonal {
+    width: 140%; /* Expande a linha diagonalmente */
+}
