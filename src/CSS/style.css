@@ -137,3 +137,52 @@ body{
     background-color: white !important;
     transition: all 0.5s ease-in-out;
 }
+
+.areaMarcacao span.win {
+    position: relative;
+  }
+  
+  .areaMarcacao span.win.horizontal-win::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px; /* Espessura da linha */
+    background-color: #25a340;
+    top: 50%; /* Centraliza verticalmente */
+    left: 0;
+    transform: translateY(-50%);
+  }
+  
+  .areaMarcacao span.win.vertical-win::before {
+    content: '';
+    position: absolute;
+    width: 5px; /* Espessura da linha */
+    height: 100%;
+    background-color: #25a340;
+    top: 0;
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%);
+  }
+  
+  .areaMarcacao span.win.diagonal-left::before {
+    content: '';
+    position: absolute;
+    width: 150%; /* Para ajustar o comprimento da linha diagonal */
+    height: 5px;
+    background-color: #25a340;
+    top: 50%;
+    left: -25%; /* Alinhar a linha diagonal esquerda */
+    transform: translateY(-50%) rotate(45deg); /* Rotação para diagonal da esquerda */
+  }
+  
+  .areaMarcacao span.win.diagonal-right::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 5px;
+    background-color: #25a340;
+    top: 50%;
+    left: -25%; /* Alinhar a linha diagonal direita */
+    transform: translateY(-50%) rotate(-45deg); /* Rotação para diagonal da direita */
+  }
+  

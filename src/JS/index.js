@@ -70,6 +70,30 @@ function disableRegion(element){
     element.removeEventListener('click', handleBoardClick)
 }
 
+function handleWin(regions) {
+    regions.forEach(function (region) {
+        const element = document.querySelector('[data-region="' + region + '"]');
+        element.classList.add('win');
+    });
+
+    // Verifica se a vitória foi em linha, coluna ou diagonal e adiciona as classes correspondentes
+    if (regions.includes("0.0") && regions.includes("0.1") && regions.includes("0.2") ||
+        regions.includes("1.0") && regions.includes("1.1") && regions.includes("1.2") ||
+        regions.includes("2.0") && regions.includes("2.1") && regions.includes("2.2")) {
+        document.querySelectorAll('.win').forEach(el => el.classList.add('horizontal-win'));
+    } else if (regions.includes("0.0") && regions.includes("1.0") && regions.includes("2.0") ||
+               regions.includes("0.1") && regions.includes("1.1") && regions.includes("2.1") ||
+               regions.includes("0.2") && regions.includes("1.2") && regions.includes("2.2")) {
+        document.querySelectorAll('.win').forEach(el => el.classList.add('vertical-win'));
+    } else if (regions.includes("0.0") && regions.includes("1.1") && regions.includes("2.2")) {
+        document.querySelectorAll('.win').forEach(el => el.classList.add('diagonal-left'));
+    } else if (regions.includes("0.2") && regions.includes("1.1") && regions.includes("2.0")) {
+        document.querySelectorAll('.win').forEach(el => el.classList.add('diagonal-right'));
+    }
+
+    const playerName = document.getElementById(turnPlayer).value;
+    document.querySelector('h2').innerHTML = playerName + ' Venceu!';
+}
 
 
 function handleBoardClick(ev){
@@ -93,7 +117,7 @@ function handleBoardClick(ev){
     disableRegion(span)
     const winRegions = getWinRegions()
     if (winRegions.length > 0){
-        console.log("Venceu")
+        handleWin(winRegions)
     }else if (vBoard.flat().includes('')){
         turnPlayer = turnPlayer === 'player1' ? 'player2' : 'player1'
         updateTitle()
