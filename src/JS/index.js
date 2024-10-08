@@ -21,6 +21,11 @@ cellElements.forEach(function(element){
 })
 */
 const BoardRegions = document.querySelectorAll('.area')
+
+const restartButton = document.querySelector('[data-win-button]')
+const winningMessage = document.querySelector('[data-winning-message]')
+const drawText = document.querySelector('[data-winning-message] h1')
+
 let vBoard = []
 let turnPlayer = ''
 
@@ -30,6 +35,14 @@ function updateTitle() {
 }
 
 function initializeGame(){
+    drawText.innerText = ''; 
+    winningMessage.classList.remove('show-winMessage')
+    const winLine = document.querySelector('.winLine');
+
+    
+    if (winLine) {
+        winLine.remove();
+    }
     vBoard = [['', '', ''], ['', '', ''], ['', '', '']]
     turnPlayer = 'player1'
     document.querySelector('h2').innerHTML = ' Vez de: <span id="turnPlayer"></span>'
@@ -91,7 +104,7 @@ function handleWin(regions) {
     } else if (regions.includes("0.0") && regions.includes("1.0") && regions.includes("2.0")){
             winLine.classList.add('vertical-left-win');
             setTimeout(() => winLine.classList.add('expand-vertical'), 100);
-            
+
     }else if (regions.includes("0.1") && regions.includes("1.1") && regions.includes("2.1")){
         winLine.classList.add('vertical-center-win');
         setTimeout(() => winLine.classList.add('expand-vertical'), 100);
@@ -111,10 +124,15 @@ function handleWin(regions) {
     }
 
     const playerName = document.getElementById(turnPlayer).value;
-    document.querySelector('h2').innerHTML = playerName + ' Venceu!';
+    document.querySelector('h2').innerHTML = 'Clique em restart para revanche'
+    drawText.innerText = playerName + ' Venceu!'
+    winningMessage.classList.add('show-winMessage')
 }
 
-
+function handleDraw() {
+    drawText.innerText = 'Empate!';
+    winningMessage.classList.add('show-winMessage');
+}
 
 function handleBoardClick(ev){
     const span = ev.currentTarget
@@ -142,10 +160,13 @@ function handleBoardClick(ev){
         turnPlayer = turnPlayer === 'player1' ? 'player2' : 'player1'
         updateTitle()
     }else{
-        document.querySelector('h2').innerHTML = 'Empate!'
+        handleDraw()
+        document.querySelector('h2').innerHTML = 'Clique em restart para revanche'
+
     }
     
 }
 
 document.getElementById('start').addEventListener('click', initializeGame)
+restartButton.addEventListener('click', initializeGame)
 

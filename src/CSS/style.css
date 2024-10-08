@@ -110,7 +110,7 @@ body{
 
 .winMessage{
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -120,6 +120,7 @@ body{
     background-color: rgba(0, 0, 0, 0.8);
     flex-direction: column;
     text-align: center;
+    align-content: center;  
 }
 
 .winMessage button {
@@ -138,6 +139,13 @@ body{
     background-color: white !important;
     transition: all 0.5s ease-in-out;
 }
+
+
+.show-winMessage{
+    display: flex;
+}
+
+
 
 .winLine {
     content: '';
